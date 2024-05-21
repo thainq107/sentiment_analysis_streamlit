@@ -1,13 +1,15 @@
+import os
 import gdown
 import streamlit as st
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 
 @st.cache
 def load_pipeline(gdrive_id='1-0VD3Bk4y6mUyIttBt00naeRYtrjD8L5'):
-  # download folder
-  gdown.download_folder(id=gdrive_id)
 
-  model_path = 'distilbert-imdb
+  model_path = 'distilbert-imdb'
+  if not os.path.exists(model_path):
+    # download folder
+    gdown.download_folder(id=gdrive_id)
   tokenizer = AutoTokenizer.from_pretrained(model_path)
   model = AutoModelForSequenceClassification.from_pretrained(model_path)
   return tokenizer, model
