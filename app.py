@@ -3,7 +3,6 @@ import gdown
 import streamlit as st
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 
-@st.cache
 def load_pipeline(gdrive_id='1-0VD3Bk4y6mUyIttBt00naeRYtrjD8L5'):
 
   model_path = 'distilbert-imdb'
