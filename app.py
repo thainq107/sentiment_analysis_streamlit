@@ -3,7 +3,8 @@ import gdown
 import streamlit as st
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 
-def load_pipeline(gdrive_id='1-0VD3Bk4y6mUyIttBt00naeRYtrjD8L5'):
+@st.cache_resource
+def load_model(gdrive_id='1-0VD3Bk4y6mUyIttBt00naeRYtrjD8L5'):
 
   model_path = 'distilbert-imdb'
   if not os.path.exists(model_path):
@@ -13,7 +14,7 @@ def load_pipeline(gdrive_id='1-0VD3Bk4y6mUyIttBt00naeRYtrjD8L5'):
   model = AutoModelForSequenceClassification.from_pretrained(model_path)
   return tokenizer, model
 
-tokenizer, model = load_pipeline()
+tokenizer, model = load_model()
 classifier = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
 
 def main():
